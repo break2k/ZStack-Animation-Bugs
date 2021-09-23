@@ -13,7 +13,8 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Button("Show Overlay") {
-                withAnimation {
+//                withAnimation(.easeIn) { // aint working
+                withAnimation(.easeIn) {
                     showsOverlay = true
                 }
             }
@@ -36,6 +37,16 @@ struct OverlayView<Content: View>: View {
     private let padding: CGFloat = 8.0
 
     var body: some View {
+        ZStack {
+            if isVisible {
+                Color.black.opacity(0.5)
+                    .onTapGesture {
+                        isVisible = false
+                    }
+                    .transition(.opacity)
+            }
+        }
+        
         VStack {
             Spacer()
             
@@ -45,19 +56,10 @@ struct OverlayView<Content: View>: View {
                 content
                     .padding(EdgeInsets(top: 0, leading: padding * 2, bottom: padding * 4, trailing: padding * 2))
                     .background(Color.gray)
-                    .transition(.move(edge: .bottom))
             }
         }
         .frame(maxWidth: .infinity)
-        .background(
-            Color.black.opacity(0.5)
-                .transition(.opacity)
-                .onTapGesture {
-                    isVisible = false
-                }
-        )
-        .transition(.move(edge: .bottom)) // this works but ignores opacity transition
-//        .transition(.move(edge: .bottom).combined(with: .opacity)) // this is not what i want
+        .transition(.move(edge: .bottom))
     }
 }
 
