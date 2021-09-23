@@ -11,6 +11,6 @@ I want to animate zIndex 0 of the ZStack via `.opacity` transition and the rest 
 
 ## Gifs
 
-![move_up_only](gifs/move_up_only.gif)
+<img src="gifs/move_up_only.gif" width=40% />
 
-![opacity_only](gifs/opacity_only.gif)
+<img src="gifs/opacity_only.gif" width=40% />
